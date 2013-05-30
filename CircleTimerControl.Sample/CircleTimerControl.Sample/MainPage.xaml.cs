@@ -17,9 +17,49 @@ namespace CircleTimerControl.Sample
         public MainPage()
         {
             InitializeComponent();
-
+            ct.TimerCompleted += ct_TimerCompleted;
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        void ct_TimerCompleted(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bouuum");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ct.State == CircleTimerState.Stopped 
+                || ct.State == CircleTimerState.Cancelled)
+            {
+                stBtn.Content = "Stop";
+                ct.Start();
+            }
+            else if(ct.State == CircleTimerState.Running 
+                || ct.State == CircleTimerState.Paused)
+            {
+                stBtn.Content = "Start";
+                ct.Cancel();
+            }
+        }
+
+        private void tgBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ct.IsIndeterminate = !ct.IsIndeterminate;
+        }
+
+        private void psBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ct.State == CircleTimerState.Paused)
+            {
+                psBtn.Content = "Pause";
+                ct.Resume();
+            }
+            else if (ct.State == CircleTimerState.Running)
+            {
+                psBtn.Content = "Resume";
+                ct.Pause();
+            }
         }
 
         // Sample code for building a localized ApplicationBar
