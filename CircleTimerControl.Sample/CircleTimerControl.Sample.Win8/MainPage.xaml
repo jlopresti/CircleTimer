@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="CircleTimerControl.Sample.Win8.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CircleTimerControl.Sample.Win8"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:jilo="using:CircleTimerControl.Sample"
+    mc:Ignorable="d">
+	<Page.Resources>
+		<Storyboard x:Name="Storyboard1">
+			<DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(RingSlice.EndAngle)" Storyboard.TargetName="ringSlice">
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="100"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</Page.Resources>
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <jilo:CircleTimer x:Name="ct"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          ArcThickness="45" CountdownVisibility="Visible" DurationInMs="10000" InnerRadius="0" Radius="100" IndeterminateCursorFill="#FF54A44C" ProgressCircleFill="#FFECB931" CircleFill="#7F65008B"/>
+	<!--<Path Stroke="Blue" StrokeThickness="0">
+        <Path.Data>
+            <PathGeometry>
+                <PathFigure StartPoint="144 144">
+                    <ArcSegment Point="145 145" Size="96 96"
+                                IsLargeArc="True" />
+					<ArcSegment Point="144 144" Size="96 96"
+                                IsLargeArc="false" />
+                </PathFigure>
+            </PathGeometry>
+        </Path.Data>
+    </Path>-->
+         <!--<jilo:RingSlice x:Name="ringSlice" Margin="474.058,229.647,591.942,238.352" UseLayoutRounding="False" Width="300" Height="300" Fill="#FF5F2626" StrokeThickness="10" EndAngle="359" InnerRadius="144" Radius="150" Stroke="#FF5F2626"/>-->
+       <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Bottom">
+            <Button x:Name="stBtn"
+                    Content="Start"
+                    Click="Button_Click"></Button>
+            <Button x:Name="psBtn"
+                    Content="Pause"
+                    Click="psBtn_Click"></Button>
+            <Button x:Name="tgBtn"
+                    Content="Toggle"
+                    Click="tgBtn_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Page>
