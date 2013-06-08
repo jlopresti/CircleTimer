@@ -213,6 +213,8 @@ namespace CircleTimerControl.Sample
         public void Cancel()
         {
             _timer.Stop();
+            if (_currentStoryboard != null)
+                _currentStoryboard.Stop();
             _ellapsedTime = 0;
             _ellapsedCircle.EndAngle = 0;
             _ellapsedText.Text = string.Empty;
@@ -249,9 +251,10 @@ namespace CircleTimerControl.Sample
 
         }
 
+        private Storyboard _currentStoryboard;
         private Storyboard GetAngleStoryboard()
         {
-            Storyboard sb = new Storyboard();
+            _currentStoryboard = new Storyboard();
             DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
             var from = new EasingDoubleKeyFrame()
                 {
@@ -267,11 +270,11 @@ namespace CircleTimerControl.Sample
             da.FillBehavior = FillBehavior.HoldEnd;
             da.KeyFrames.Add(from);
             da.KeyFrames.Add(to);
-            sb.Children.Add(da);
+            _currentStoryboard.Children.Add(da);
             da.EnableDependentAnimation = true;
             Storyboard.SetTarget(da, _ellapsedCircle);
             Storyboard.SetTargetProperty(da, "(RingSlice.EndAngle)");
-            return sb;
+            return _currentStoryboard;
         }
     }
 
